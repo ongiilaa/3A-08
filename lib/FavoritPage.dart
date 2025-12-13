@@ -1,111 +1,92 @@
 import 'package:flutter/material.dart';
+import 'FavoriteModel.dart';
+import 'CartModel.dart';
+import 'CheckOutPage.dart';
 
-class FavoritePage extends StatelessWidget {
-  final List<Map<String, dynamic>> favorites;
+class FavoritePage extends StatefulWidget {
+  const FavoritePage({super.key, required List favorites});
 
-  const FavoritePage({super.key, required this.favorites});
+  @override
+  State<FavoritePage> createState() => _FavoritePageState();
+}
 
+class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(title: const Text("Favorite")),
+      body: FavoriteData.items.isEmpty
+          ? const Center(child: Text("Favorite kosong"))
+          : ListView.builder(
+              itemCount: FavoriteData.items.length,
+              itemBuilder: (_, i) {
+                final item = FavoriteData.items[i];
+                return Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    leading: Image.asset(item.img, width: 50),
+                    title: Text(item.name),
+                    subtitle: Text("Rp ${item.price}"),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // ADD TO CART
+                        IconButton(
+                          icon: const Icon(Icons.shopping_cart),
+                          onPressed: () {
+                            CartData.add(
+                              CartItem(
+                                img: item.img,
+                                name: item.name,
+                                price: item.price,
+                                quantity: 1,
+                              ),
+                            );
+                          },
+                        ),
 
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // HEADER
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.arrow_back, size: 26),
-                  ),
-                  const SizedBox(width: 15),
-                  const Text(
-                    "Favorite",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                        // DELETE FAVORITE
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            setState(() {
+                              FavoriteData.remove(item.name);
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                );
+              },
+            ),
+
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16),
+        child: ElevatedButton(
+          child: const Text("Checkout Favorite"),
+          onPressed: () {
+            for (var item in FavoriteData.items) {
+              CartData.add(
+                CartItem(
+                  img: item.img,
+                  name: item.name,
+                  price: item.price,
+                  quantity: 1,
+                ),
+              );
+            }
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => CheckoutPage(
+                  name: "Favorite",
+                  items: List.from(CartData.items),
+                ),
               ),
-            ),
-
-            const SizedBox(height: 10),
-
-            // LIST FAVORITE
-            Expanded(
-              child: favorites.isEmpty
-                  ? const Center(
-                      child: Text(
-                        "Belum ada favorite.",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    )
-                  : ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: favorites.length,
-                      itemBuilder: (context, index) {
-                        final item = favorites[index];
-
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 14),
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.black12),
-                          ),
-                          child: Row(
-                            children: [
-                              // GAMBAR
-                              Container(
-                                width: 60,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  image: DecorationImage(
-                                    image: AssetImage(item["img"]),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(width: 12),
-
-                              // NAMA + HARGA
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    item["name"],
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    "Rp ${item["price"]}",
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                ],
-                              ),
-
-                              const Spacer(),
-
-                              const Icon(Icons.favorite, size: 26),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-            ),
-
-            const SizedBox(height: 20),
-          ],
+            );
+          },
         ),
       ),
     );

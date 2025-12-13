@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'FavoritPage.dart';
+import 'FavoriteModel.dart';
 import 'NonPopCoffee.dart';
 import 'PopCoffe.dart';
 import 'ProductPage.dart';
@@ -12,10 +14,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController searchController = TextEditingController();
-  
-  // LIST FAVORIT GLOBAL DI HOMEPAGE
-List<Map<String, dynamic>> favorites = [];
 
+  // LIST FAVORIT GLOBAL DI HOMEPAGE
+  List<Map<String, dynamic>> favorites = [];
 
   // ================================
   // LIST PRODUK (SUMBER SEARCH)
@@ -97,7 +98,15 @@ List<Map<String, dynamic>> favorites = [];
               child: const Icon(Icons.home, size: 28),
             ),
             GestureDetector(
-              onTap: () => Navigator.pushNamed(context, "/favorite"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const FavoritePage(favorites: []),
+                  ),
+                );
+              },
+
               child: const Icon(Icons.favorite_border, size: 28),
             ),
             GestureDetector(
@@ -378,10 +387,14 @@ List<Map<String, dynamic>> favorites = [];
               child: CircleAvatar(
                 radius: 14,
                 backgroundColor: Colors.white,
-                child: const Icon(
-                  Icons.favorite_border,
+                child: Icon(
+                  FavoriteData.isFavorite(name)
+                      ? Icons.favorite
+                      : Icons.favorite_border,
                   size: 18,
-                  color: Colors.black,
+                  color: FavoriteData.isFavorite(name)
+                      ? Colors.red
+                      : Colors.black,
                 ),
               ),
             ),
