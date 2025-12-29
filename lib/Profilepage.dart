@@ -74,6 +74,7 @@ class ProfilePage extends StatelessWidget {
             Icon(icon, size: 22),
             const SizedBox(width: 15),
             Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            
           ],
         ),
       ),

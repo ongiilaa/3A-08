@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
 
       // =========================
-      // BOTTOM NAV (tetap sama)
+      // BOTTOM NAVIGATION BAR
       // =========================
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(horizontal: 30),
