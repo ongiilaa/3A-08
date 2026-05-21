@@ -8,32 +8,31 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
+
           child: Column(
             children: [
               const SizedBox(height: 40),
 
-              // Logo
+              // LOGO
               Center(
-                child: Image.asset(
-                  "assets/images/kopilogo.png",
-                  height: 150,
-                ),
+                child: Image.asset("assets/images/kopilogo.png", height: 150),
               ),
 
               const SizedBox(height: 40),
 
-              // Title
+              // TITLE
               const Align(
                 alignment: Alignment.centerLeft,
+
                 child: Text(
                   "Sign Up",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
+
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
               ),
 
@@ -41,46 +40,62 @@ class SignUpPage extends StatelessWidget {
 
               const Align(
                 alignment: Alignment.centerLeft,
+
                 child: Text(
                   "Don’t have an account? Come join the caffeine club!",
+
                   style: TextStyle(fontSize: 14, height: 1.3),
                 ),
               ),
 
               const SizedBox(height: 24),
 
-              // Input fields
+              // INPUT NAME
               _buildInputField("Name"),
+
               const SizedBox(height: 12),
 
+              // INPUT EMAIL
               _buildInputField("Account Email"),
+
               const SizedBox(height: 12),
 
+              // INPUT ADDRESS
               _buildInputField("Address"),
 
               const SizedBox(height: 20),
 
-              // Next button
+              // BUTTON
               SizedBox(
                 width: double.infinity,
+
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
+
                     foregroundColor: Colors.white,
+
                     padding: const EdgeInsets.symmetric(vertical: 14),
+
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
+
                   onPressed: () {
                     Navigator.push(
                       context,
+
                       MaterialPageRoute(builder: (_) => const SignUpStep2()),
                     );
                   },
+
                   child: const Text("Next"),
                 ),
               ),
+
+              // SPACE BAWAH
+              const SizedBox(height: 40),
             ],
           ),
         ),
@@ -88,19 +103,26 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
-  // Custom input field
-  Widget _buildInputField(String hint) {
+  // ======================
+  // INPUT FIELD
+  // ======================
+  static Widget _buildInputField(String hint) {
     return Container(
       decoration: BoxDecoration(
         color: const Color.fromRGBO(199, 186, 157, 1),
+
         borderRadius: BorderRadius.circular(12),
       ),
+
       child: TextField(
         decoration: InputDecoration(
           hintText: hint,
+
           border: InputBorder.none,
+
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,
+
             vertical: 16,
           ),
         ),
