@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'CartModel.dart';
-import 'CheckOutPage.dart';
+import 'cart_model.dart';
+import 'check_out_page.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -10,7 +10,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  String rupiah(int v) => v.toString().replaceAllMapped(
+String rupiah(int v) => v.toString().replaceAllMapped(
     RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
     (m) => '${m[1]}.',
   );
@@ -62,6 +62,20 @@ class _CartPageState extends State<CartPage> {
               Text(
                 "Total ${rupiah(CartData.totalPrice)}",
                 style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+            // Back button + title
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.pop(context),
+              ),
+              const SizedBox(width: 10),
+              const Text(
+                "Settings",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
           ),

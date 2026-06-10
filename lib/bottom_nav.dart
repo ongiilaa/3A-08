@@ -13,10 +13,30 @@ class BottomNav extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          navItem(Icons.home, 0, current, () => Navigator.pushNamed(context, "/home")),
-          navItem(Icons.favorite_border, 1, current, () {}),
-          navItem(Icons.shopping_cart_outlined, 2, current, () {}),
-          navItem(Icons.person, 3, current, () => Navigator.pushNamed(context, "/profile")),
+          navItem(
+            Icons.home,
+            0,
+            current,
+            () => Navigator.pushNamed(context, "/home"),
+          ),
+          navItem(
+            Icons.favorite_border,
+            1,
+            current,
+            () => Navigator.pushNamed(context, "/favorite"),
+          ),
+          navItem(
+            Icons.shopping_cart_outlined,
+            2,
+            current,
+            () => Navigator.pushNamed(context, "/cart"),
+          ),
+          navItem(
+            Icons.person,
+            3,
+            current,
+            () => Navigator.pushNamed(context, "/profile"),
+          ),
         ],
       ),
     );
@@ -33,4 +53,3 @@ class BottomNav extends StatelessWidget {
     );
   }
 }
-

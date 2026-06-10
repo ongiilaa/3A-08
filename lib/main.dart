@@ -1,19 +1,19 @@
-import 'package:coffeshop/Profilepage.dart';
-import 'package:coffeshop/WelcomePage.dart';
-import 'package:coffeshop/CartPage.dart';
+import 'package:coffeshop/profile_page.dart';
+import 'package:coffeshop/welcome_page.dart';
+import 'package:coffeshop/cart_page.dart';
 import 'package:flutter/material.dart';
 
-import 'FavoritPage.dart';
-import 'HomePage.dart';
-import 'LoginPage.dart';
-import 'SignUp2.dart';
+import 'favorit_page.dart';
+import 'home_page.dart';
+import 'login_page.dart';
+import 'sign_up2.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         "/signup": (context) => const SignUpStep2(),
         "/home": (context) => const HomePage(),
         "/cart": (context) => const CartPage(),
-        "/favorite": (context) => const FavoritePage(favorites: []),
+        "/favorite": (context) => const FavoritePage(),
         "/profile": (context) => const ProfilePage(),
       },
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'welcome_page.dart';
 import 'bottom_nav.dart';
 import 'history.dart';
 
@@ -17,6 +17,7 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               // Back button + title
               Row(
                 children: [
@@ -34,13 +35,23 @@ class SettingsPage extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              buildButton(context, "History", () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const HistoryPage()));
+             buildButton(context, "History", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HistoryPage()),
+                );
               }),
+
 
               const SizedBox(height: 15),
 
-              buildButton(context, "Logout", () {}),
+             buildButton(context, "Logout", () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (_) => const WelcomePage()),
+                  (route) => false,
+                );
+              }),
             ],
           ),
         ),

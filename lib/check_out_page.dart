@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'CartModel.dart';
-import 'SuccesPaymentPage.dart';
+import 'cart_model.dart';
+import 'succes_payment_page.dart';
 
 class CheckoutPage extends StatefulWidget {
   final List<CartItem> items;

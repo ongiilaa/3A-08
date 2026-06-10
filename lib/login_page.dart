@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'SignUp2.dart';
-
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +16,23 @@ class SignUpPage extends StatelessWidget {
             children: [
               const SizedBox(height: 40),
 
+              // ======================
               // LOGO
+              // ======================
               Center(
                 child: Image.asset("assets/images/kopilogo.png", height: 150),
               ),
 
               const SizedBox(height: 40),
 
+              // ======================
               // TITLE
+              // ======================
               const Align(
                 alignment: Alignment.centerLeft,
 
                 child: Text(
-                  "Sign Up",
+                  "Login",
 
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
@@ -42,7 +44,7 @@ class SignUpPage extends StatelessWidget {
                 alignment: Alignment.centerLeft,
 
                 child: Text(
-                  "Don’t have an account? Come join the caffeine club!",
+                  "Hey there, coffee lover! Login and grab your brew!",
 
                   style: TextStyle(fontSize: 14, height: 1.3),
                 ),
@@ -50,22 +52,23 @@ class SignUpPage extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // INPUT NAME
-              _buildInputField("Name"),
+              // ======================
+              // EMAIL FIELD
+              // ======================
+              _buildInputField("Email"),
 
               const SizedBox(height: 12),
 
-              // INPUT EMAIL
-              _buildInputField("Account Email"),
-
-              const SizedBox(height: 12),
-
-              // INPUT ADDRESS
-              _buildInputField("Address"),
+              // ======================
+              // PASSWORD FIELD
+              // ======================
+              _buildInputField("Password", obscureText: true),
 
               const SizedBox(height: 20),
 
-              // BUTTON
+              // ======================
+              // LOGIN BUTTON
+              // ======================
               SizedBox(
                 width: double.infinity,
 
@@ -83,18 +86,16 @@ class SignUpPage extends StatelessWidget {
                   ),
 
                   onPressed: () {
-                    Navigator.push(
-                      context,
-
-                      MaterialPageRoute(builder: (_) => const SignUpStep2()),
-                    );
+                    Navigator.pushNamed(context, "/home");
                   },
 
-                  child: const Text("Next"),
+                  child: const Text("Login"),
                 ),
               ),
 
-              // SPACE BAWAH
+              // ======================
+              // SPACE BOTTOM
+              // ======================
               const SizedBox(height: 40),
             ],
           ),
@@ -104,9 +105,9 @@ class SignUpPage extends StatelessWidget {
   }
 
   // ======================
-  // INPUT FIELD
+  // CUSTOM INPUT FIELD
   // ======================
-  static Widget _buildInputField(String hint) {
+  static Widget _buildInputField(String hint, {bool obscureText = false}) {
     return Container(
       decoration: BoxDecoration(
         color: const Color.fromRGBO(199, 186, 157, 1),
@@ -115,6 +116,8 @@ class SignUpPage extends StatelessWidget {
       ),
 
       child: TextField(
+        obscureText: obscureText,
+
         decoration: InputDecoration(
           hintText: hint,
 

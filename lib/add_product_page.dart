@@ -72,6 +72,7 @@ class _AddProductPageState
       "image": imageFile!.path,
     });
 
+    if (!mounted) return;
     Navigator.pop(context);
   }
 

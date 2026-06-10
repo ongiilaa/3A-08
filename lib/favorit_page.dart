@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'FavoriteModel.dart';
-import 'CartModel.dart';
-import 'CheckOutPage.dart';
+import 'favorite_model.dart';
+import 'cart_model.dart';
+import 'check_out_page.dart';
+import 'bottom_nav.dart';
+
+String rupiah(int v) => v.toString().replaceAllMapped(
+      RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+      (m) => '${m[1]}.',
+    );
 
 class FavoritePage extends StatefulWidget {
-  const FavoritePage({super.key, required List favorites});
+  const FavoritePage({super.key});
 
   @override
   State<FavoritePage> createState() => _FavoritePageState();
@@ -30,6 +36,7 @@ class _FavoritePageState extends State<FavoritePage> {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        
                         // ADD TO CART
                         IconButton(
                           icon: const Icon(Icons.shopping_cart),
@@ -61,34 +68,61 @@ class _FavoritePageState extends State<FavoritePage> {
               },
             ),
 
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16),
-        child: ElevatedButton(
-          child: const Text("Checkout Favorite"),
-          onPressed: () {
-            for (var item in FavoriteData.items) {
-              CartData.add(
-                CartItem(
-                  img: item.img,
-                  name: item.name,
-                  price: item.price,
-                  quantity: 1,
+     bottomNavigationBar: Column(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    Container(
+      padding: const EdgeInsets.all(18),
+      decoration: const BoxDecoration(
+        color: Color(0xFFC7BA9D),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Items (${CartData.totalItems})"),
+              Text(
+                "Total ${rupiah(CartData.totalPrice)}",
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          GestureDetector(
+            onTap: () {
+              if (CartData.items.isEmpty) return;
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CheckoutPage(
+                    items: List.from(CartData.items),
+                    name: '',
+                  ),
                 ),
               );
-            }
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => CheckoutPage(
-                  name: "Favorite",
-                  items: List.from(CartData.items),
-                ),
+            },
+            child: Container(
+              height: 48,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: const Color(0xFFE4DCC4),
+                borderRadius: BorderRadius.circular(14),
               ),
-            );
-          },
-        ),
+              child: const Text(
+                "Checkout",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
+        ],
       ),
+    ),
+    const BottomNav(current: 2),
+  ],
+),
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'CartModel.dart';
-import 'CheckOutPage.dart';
-import 'CartPage.dart';
+import 'cart_model.dart';
+import 'check_out_page.dart';
+import 'cart_page.dart';
 
 class ProductPage extends StatefulWidget {
   final String img;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'HomePage.dart';
+import 'home_page.dart';
 
 class SuccessPaymentPage extends StatelessWidget {
   const SuccessPaymentPage({super.key});

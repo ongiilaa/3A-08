@@ -67,6 +67,7 @@ class _EditProductPageState extends State<EditProductPage> {
       "image": imageFile!.path,
     });
 
+    if (!mounted) return;
     Navigator.pop(context);
   }
 
